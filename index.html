@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="directives/mi-focus.js"></script>
+    <script src="directives/change-style.js"></script>
+    <script src="filter/currency-filter.js"></script>
+    <script src="plugins/about-me.js"></script>
+
+    <script src="components/message.js"></script>
+    <script src="components/computed-properties.js"></script>
+    <script src="components/methods.js"></script>
+    <script src="components/vmodel.js"></script>
+    <script src="components/vmodelArray.js"></script>
+    <script src="components/emit.js"></script>
+    <script src="components/parent-data.js"></script>
+    <script src="components/child-data.js"></script>
+    <script src="components/child-methods.js"></script>
+    <script src="components/login-form.js"></script>
+    <script src="components/loops.js"></script>
+    <script src="components/conditionals.js"></script>
+    <script src="components/slots.js"></script>
+    <script src="components/watchers.js"></script>
+    <script src="components/computed-properties-get-set.js"></script>
+    <script src="components/dinamic-component/cmp1.js"></script>
+    <script src="components/dinamic-component/cmp2.js"></script>
+    <script src="components/dinamic-component/cmp3.js"></script>
+    <script src="components/load-dynamic-component.js"></script>
+    <script src="components/mixin.js"></script>
+    <script src="components/props.js"></script>
+    <script src="components/props2.js"></script>
+    <style>.main-container{ margin-top: 4rem}</style>
+  </head>
+  <body>
+    <div id="app" class="container main-container">
+        <message v-change-style="{backgroundColor: '#cce5ff', color: '#004085'}"></message>
+        <computed-properties></computed-properties>
+        <methods></methods>
+        <vmodel></vmodel>
+        <vmodel-array></vmodel-array>
+        <emit @showcarbrand="showCarBrandFromCmp"></emit>
+        <parent-data></parent-data>
+        <child-data ref="childdata"></child-data>
+        <child-methods ref="childMethods"></child-methods>
+        <login-form></login-form>
+        <loops></loops>
+        <conditionals></conditionals>
+        <slots>
+          <template slot="header">
+            <message></message>
+            <p>Contenido del slot sin nombre</p>
+          </template>
+        </slots>
+        <watchers></watchers>
+        <computed-properties-get-set></computed-properties-get-set>
+        <load-dynamic-component></load-dynamic-component>
+        <mixin></mixin>
+        <props name="Darío José" surname="Zubaray"></props>
+        <props2 name="Julieta =)" surname="Zubaray" :age="7"></props2>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        mounted() {
+          console.log("mounted!")
+          const cmpName = this.$refs.childdata.compName;
+          console.log("dato hijo: " + cmpName);
+
+          setTimeout( () => {
+            this.$refs.childMethods.showComponentName();
+          }, 5000);
+
+          console.log(this.$me('Dario', '30'));
+        },
+        data () {
+          return {
+            appName: 'Iniciando con vuejs2'
+          }
+        },
+        methods: {
+          showCarBrandFromCmp(cardBrand) {
+            alert(cardBrand);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
